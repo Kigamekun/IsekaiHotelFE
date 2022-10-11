@@ -1,0 +1,26 @@
+.heroAuth {
+    background: url('/img/hero.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width:100%;
+    height:100vh;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    
+}
+
+.content {
+    margin-right: 100px;
+    padding: 70px;
+    width: 515px;
+
+    border-radius:10px;
+    background: white;
+}
+
+.btn {
+    background: linear-gradient(90deg, #53A1D0, #97C7D5) !important; 
+}
