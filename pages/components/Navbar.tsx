@@ -17,7 +17,7 @@ const Navbar: FC<{}> = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link  href="/hotel">
+                            <Link  href="/">
                                 <a className="nav-link">Home</a>
                             </Link>
                         </li>
@@ -25,7 +25,9 @@ const Navbar: FC<{}> = () => {
                             <a className="nav-link " aria-current="page" href="#">About</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link " aria-current="page" href="#">Food</a>
+                        <Link  href="/food">
+                                <a className="nav-link">Food</a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link " aria-current="page" href="#">Kiga</a>

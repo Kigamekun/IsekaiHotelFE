@@ -5,7 +5,7 @@ import styles from '../styles/index.module.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import Navbar  from './components/Navbar'
 
-const App: NextPage = () => {
+const Home: NextPage = () => {
   return (
     <>
       <div className={styles.hero}>
@@ -57,4 +57,4 @@ const App: NextPage = () => {
   )
 }
 
-export default App
+export default Home
