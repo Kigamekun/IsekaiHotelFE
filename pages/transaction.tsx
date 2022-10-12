@@ -5,7 +5,32 @@ import styles from '../styles/transaction.module.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import Navbar  from './components/Navbar'
 import Footer from './components/Footer'
+import React, { useEffect, useState } from "react"
+import axios from 'axios'
+
+
 const Transaction: NextPage = () => {
+
+
+  const [datas, setData] = useState<any[]>([]);
+
+  const getTransaction = async () => {
+    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_room`)
+      .then(function (response) {
+        setData(response.data.data.data);
+      }).catch(function (error) {
+      })
+  }
+
+
+
+
+  useEffect(() => {
+    getTransaction();
+   
+  }, []);
+
+
   return (
     <>
     <div className={styles.overflow}>

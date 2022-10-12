@@ -86,7 +86,7 @@ const Food: NextPage = () => {
 
   useEffect(() => {
     getFoodData();
-  }, [data]);
+  }, []);
 
 
 

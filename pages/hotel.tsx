@@ -6,13 +6,25 @@ import styles from '../styles/hotel.module.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import ModalBody from './components/ModalBody'
 import React, { useEffect, useState } from "react"
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
 import axios from 'axios'
 import $ from 'jquery'
 
-import Parser from 'html-react-parser';
+import Parser from 'html-react-parser'
+import ReactDOM from 'react-dom'
+
+
+interface IHotel {
+  id: number;
+  name: string;
+  price: string;
+  thumb: string;
+  start_from?: string;
+  end_at?: string;
+}
 
 const Hotel: NextPage = () => {
 
@@ -21,6 +33,7 @@ const Hotel: NextPage = () => {
 
   const [datas, setData] = useState<any[]>([]);
   const [hotelData, setHotelData] = useState<any[]>([]);
+  const [modalData, setModalData] = useState<IHotel>({id: 0, name: "", price: "", thumb: "",start_from: "",end_at: "" });
   const [modalDetail, setModalDetail] = useState<string>('Loading ...');
 
   const getRoomData = async () => {
@@ -36,30 +49,15 @@ const Hotel: NextPage = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = (e: any) => {
-
-
-    var html = `
-    <div className="modal-content">
-      <div className="modal-body p-5">
-      <img class="w-100 mb-4" style="border-radius:10px;height:360px" src="${e.currentTarget.getAttribute('data-thumb')}"/>
-      <h3 ><b>${e.currentTarget.getAttribute('data-name')}</b></h3  >
-      <h5>$${e.currentTarget.getAttribute('data-price')}</h5>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero tempora beatae officia quisquam ab impedit facilis explicabo dignissimos nostrum, blanditiis cum cumque nihil? Animi ut harum adipisci cupiditate aliquid non asperiores quasi dolor vitae maxime, molestias eum officiis minus maiores.  </p>
-        <br />
-        <br />
-        <br />
-        <div className="d-flex justify-content-end gap-4">
-          <button type="button" className="btn button-left" data-bs-dismiss="modal">Close</button>
-          <button type="button" className="btn button-right">Book !</button>
-        </div>
-
-        </div>
-
-    </div>
-  
-  `;
-    setModalDetail(html);
-    console.log(modalDetail);
+    setModalData({
+      'start_from': data.start_from! as string,
+      'end_at': data.end_at! as string,
+      'id': e.currentTarget.getAttribute('data-id'),
+      'name': e.currentTarget.getAttribute('data-name'),
+      'thumb': e.currentTarget.getAttribute('data-thumb'),
+      'price': e.currentTarget.getAttribute('data-price')
+    });
+    console.log(modalData);
     setShow(true);
 
   };
@@ -75,15 +73,13 @@ const Hotel: NextPage = () => {
 
 
   useEffect(() => {
+    if (!router.isReady) return;
     getRoomData();
     getHotelData();
-  }, [data,hotelData]);
+  }, [router.isReady]);
 
 
 
-  const getDataModal = async (e: any) => {
-
-  }
 
   return (
     <>
@@ -119,13 +115,13 @@ const Hotel: NextPage = () => {
                       <input type="date" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
                     </div>
                     <div className="mb-3">
-                    <select id="hotel" className="form-control" >
-              <option value="">Select Hotel</option>
-              {datas &&
-                datas.map((dt, key) => (
-                  <option value={dt.id} key={key}>{dt.name}</option>
-                ))}
-            </select>
+                      <select id="hotel" className="form-control" >
+                        <option value="">Select Hotel</option>
+                        {datas &&
+                          datas.map((dt, key) => (
+                            <option value={dt.id} key={key}>{dt.name}</option>
+                          ))}
+                      </select>
                     </div>
                     <div className="mb-3">
                       <input type="date" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
@@ -153,12 +149,19 @@ const Hotel: NextPage = () => {
       <div className="container" style={{ background: '#BDD5D7', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap', padding: '50px', borderRadius: '20px' }}>
         {datas &&
           datas.map((data, key) => (
-            <div key={key} onClick={handleShow} className={styles.cards} data-name={data.name} data-thumb={data.thumb} data-price={data.price} data-description={data.description}>
+            <div key={key} onClick={handleShow} className={styles.cards} data-id={data.id} data-name={data.name} data-thumb={data.thumb} data-price={data.price} data-description={data.description}>
               <img src={data.thumb} className="card-img-top" style={{ height: "200px" }} />
               <h5><b>{data.name}</b></h5>
               <h6>${data.price}</h6>
             </div>
           ))}
+
+      </div>
+      <br />
+      <div className="container">
+        <div className="d-flex justify-content-end">
+          <b> View More</b>
+        </div>
       </div>
       <Footer></Footer>
 
@@ -169,8 +172,8 @@ const Hotel: NextPage = () => {
 
 
 
-      <Modal size="lg" onEntered={getDataModal} show={show} onHide={handleClose}>
-        {Parser(modalDetail)}
+      <Modal size="lg" id="modal-details" show={show} onHide={handleClose}>
+        <ModalBody id={modalData.id} start_from={modalData.start_from!}  end_at={modalData.end_at!}  name={modalData.name} price={modalData.price} thumb={modalData.thumb} />
       </Modal>
     </>
   )
