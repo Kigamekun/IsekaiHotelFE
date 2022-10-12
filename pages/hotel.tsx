@@ -14,6 +14,7 @@ import $ from 'jquery'
 
 import Parser from 'html-react-parser';
 
+
 const Hotel: NextPage = () => {
 
   const router = useRouter()
@@ -42,7 +43,7 @@ const Hotel: NextPage = () => {
     <div className="modal-content">
       <div className="modal-body p-5">
       <img class="w-100 mb-4" style="border-radius:10px;height:360px" src="${e.currentTarget.getAttribute('data-thumb')}"/>
-      <h3 ><b>${e.currentTarget.getAttribute('data-name')}</b></h3  >
+      <h3><b>${e.currentTarget.getAttribute('data-name')}</b></h3>
       <h5>$${e.currentTarget.getAttribute('data-price')}</h5>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero tempora beatae officia quisquam ab impedit facilis explicabo dignissimos nostrum, blanditiis cum cumque nihil? Animi ut harum adipisci cupiditate aliquid non asperiores quasi dolor vitae maxime, molestias eum officiis minus maiores.  </p>
         <br />
@@ -50,11 +51,9 @@ const Hotel: NextPage = () => {
         <br />
         <div className="d-flex justify-content-end gap-4">
           <button type="button" className="btn button-left" data-bs-dismiss="modal">Close</button>
-          <button type="button" className="btn button-right">Book !</button>
+          <button type="button" onClick="${{getDataModal}}" className="btn button-right" data-id="${e.currentTarget.getAttribute('data-id')}">Book !</button>
         </div>
-
         </div>
-
     </div>
   
   `;
@@ -75,14 +74,15 @@ const Hotel: NextPage = () => {
 
 
   useEffect(() => {
-    getRoomData();
-    getHotelData();
-  }, [data,hotelData]);
+    if(!router.isReady) return ;
+      getRoomData();
+      getHotelData();
+  }, [router.isReady]);
 
 
 
   const getDataModal = async (e: any) => {
-
+    console.log('ada');
   }
 
   return (
