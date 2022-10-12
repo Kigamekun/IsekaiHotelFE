@@ -95,7 +95,7 @@ const Food: NextPage = () => {
       <div className={styles.hero}>
         <Navbar></Navbar>
         <div className={styles.heroContent}>
-          <div className={styles.heroSection} >
+        <div className={styles.heroSection} >
             <div className="m-5">
               <h3><b>Name Food</b></h3>
               <form onSubmit={searchFood} className="d-flex justify-content-around gap-5">
@@ -107,6 +107,10 @@ const Food: NextPage = () => {
             </div>
           </div>
         </div>
+
+       
+
+
       </div>
       <br />
       <br />

@@ -21,3 +21,12 @@
   width: 160px !important;
 
 }
+
+
+#checkboxes input[type=checkbox]{
+  display: none;
+}
+
+#checkboxes input[type=checkbox]:checked + .whatever{
+  background-color: rgba(25, 135, 84,50%);
+}

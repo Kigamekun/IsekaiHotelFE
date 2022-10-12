@@ -20,6 +20,7 @@ const Hotel: NextPage = () => {
   const data = router.query;
 
   const [datas, setData] = useState<any[]>([]);
+  const [hotelData, setHotelData] = useState<any[]>([]);
   const [modalDetail, setModalDetail] = useState<string>('Loading ...');
 
   const getRoomData = async () => {
@@ -64,9 +65,19 @@ const Hotel: NextPage = () => {
   };
 
 
+  const getHotelData = async () => {
+    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/hotel`)
+      .then(function (response) {
+        setHotelData(response.data.data.data);
+      }).catch(function (error) {
+      })
+  }
+
+
   useEffect(() => {
     getRoomData();
-  }, [data]);
+    getHotelData();
+  }, [data,hotelData]);
 
 
 
@@ -80,6 +91,52 @@ const Hotel: NextPage = () => {
         <Navbar></Navbar>
         <div className={styles.heroContent}>
           <div className={styles.heroSection}>
+            <div className='d-flex justify-content-around align-items-center w-100 h-100'>
+              <div>
+                <h4>Faccility </h4>
+                <br />
+                <div id="checkboxes" className='d-flex gap-3'>
+                  <input type="checkbox" name="rGroup" value="1" id="r1" />
+                  <label className='whatever' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r1">
+                  </label>
+                  <input type="checkbox" name="rGroup" value="2" id="r2" />
+                  <label className='whatever' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r2">
+                  </label>
+                  <input type="checkbox" name="rGroup" value="3" id="r3" />
+                  <label className='whatever' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r3">
+                  </label>
+                  <input type="checkbox" name="rGroup" value="4" id="r4" />
+                  <label className='whatever' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r4">
+                  </label>
+                </div>
+              </div>
+              <div>
+                <div style={{ textAlign: 'center' }}>
+                  <h4>Check In - Check Out </h4>
+                  <br />
+                  <div className='d-flex gap-3'>
+                    <div className="mb-3">
+                      <input type="date" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                    </div>
+                    <div className="mb-3">
+                    <select id="hotel" className="form-control" >
+              <option value="">Select Hotel</option>
+              {datas &&
+                datas.map((dt, key) => (
+                  <option value={dt.id} key={key}>{dt.name}</option>
+                ))}
+            </select>
+                    </div>
+                    <div className="mb-3">
+                      <input type="date" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" className="btn" style={{ borderRadius: "20px", fontSize: "32px", color: '#53A1D0', background: '#53A1D0' }}>
+                <b>Search</b>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -101,7 +158,6 @@ const Hotel: NextPage = () => {
               <h5><b>{data.name}</b></h5>
               <h6>${data.price}</h6>
             </div>
-
           ))}
       </div>
       <Footer></Footer>
