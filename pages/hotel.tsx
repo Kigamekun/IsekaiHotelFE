@@ -40,8 +40,9 @@ const Hotel: NextPage = () => {
     var html = `
     <div className="modal-content">
       <div className="modal-body p-5">
-      <img class="w-100 mb-4" style="border-radius:10px;" src="${e.currentTarget.getAttribute('data-thumb')}"/>
+      <img class="w-100 mb-4" style="border-radius:10px;height:360px" src="${e.currentTarget.getAttribute('data-thumb')}"/>
       <h3 ><b>${e.currentTarget.getAttribute('data-name')}</b></h3  >
+      <h5>$${e.currentTarget.getAttribute('data-price')}</h5>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero tempora beatae officia quisquam ab impedit facilis explicabo dignissimos nostrum, blanditiis cum cumque nihil? Animi ut harum adipisci cupiditate aliquid non asperiores quasi dolor vitae maxime, molestias eum officiis minus maiores.  </p>
         <br />
         <br />
@@ -95,7 +96,7 @@ const Hotel: NextPage = () => {
       <div className="container" style={{ background: '#BDD5D7', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap', padding: '50px', borderRadius: '20px' }}>
         {datas &&
           datas.map((data, key) => (
-            <div key={key} onClick={handleShow} className={styles.cards} data-name={data.name} data-thumb={data.thumb}>
+            <div key={key} onClick={handleShow} className={styles.cards} data-name={data.name} data-thumb={data.thumb} data-price={data.price} data-description={data.description}>
               <img src={data.thumb} className="card-img-top" style={{ height: "200px" }} />
               <h5><b>{data.name}</b></h5>
               <h6>${data.price}</h6>

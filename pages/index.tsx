@@ -9,8 +9,8 @@ import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
 
 type UserSubmitForm = {
   start_from: Date;
@@ -23,12 +23,18 @@ type UserSubmitForm = {
 const App: NextPage = () => {
   const [datas, setData] = useState<any[]>([]);
 
+
+
+
+  const router = useRouter()
+
+
+
   const getHotelData = async () => {
     var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/hotel`)
       .then(function (response) {
         setData(response.data.data.data);
       }).catch(function (error) {
-
       })
   }
 
@@ -60,8 +66,7 @@ const App: NextPage = () => {
     })
   };
 
-  const router = useRouter()
-
+  
 
   useEffect(() => {
     getHotelData();
@@ -109,7 +114,7 @@ const App: NextPage = () => {
                   <option value={dt.id} key={key}>{dt.name}</option>
                 ))}
             </select>
-            <input type="number" id='count' {...register('count')} className={`form-control ${errors.count ? 'is-invalid' : ''}`} min="0" style={{ width: '75px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} />
+            <input type="number" id='count' {...register('count')} className={`form-control ${errors.count ? 'is-invalid' : ''}`} min="1" style={{ width: '75px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} />
           </div>
           <div>
             <button type="submit" className="btn" style={{ borderRadius: "20px", fontSize: "32px", color: '#53A1D0', height: '140px', width: '330px', background: 'white' }}>
