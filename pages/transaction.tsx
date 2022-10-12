@@ -16,101 +16,102 @@ const Transaction: NextPage = () => {
       <div className={styles.containerBook}>
           <div className={styles.containerHead}>
             <h1><b>Hotels Transaction Room</b></h1>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <p>Lorem Ipsum is simply dummy text of the printing<br></br> and typesetting industry.</p>
           </div>
-        <div className={styles.heroTable}>
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Billing To</th>
-                  <th>Start date</th>
-                  <th>Start date</th>
-                  <th>End date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td> 80 cm </td>
-                  <td> 80 cm </td>
-                  <td> 60 cm </td>
-                  <td> 60 cm </td>
-                  <td> 220 cm </td>
-                </tr>
-                <tr>
-                  <td> 70 cm </td>
-                  <td> 70 cm </td>
-                  <td> 65 cm </td>
-                  <td> 65 cm </td>
-                  <td> 80 cm </td>
-                </tr>
-                <tr>
-                  <td> 16 kg </td>
-                  <td> 16 kg </td>
-                  <td> 22 kg </td>
-                  <td> 22 kg </td>
-                  <td> 31 kg </td>
-                </tr>
-                <tr>
-                  <td> 120 cm </td>
-                  <td> 120 cm </td>
-                  <td> 92 cm </td>
-                  <td> 92 cm </td>
-                  <td> 80 cm </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="container table-responsive py-5"> 
+        <table className="table table-striped table-hover">
+          <thead className="table-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
         </div>
       </div>
-
         
         <div className={styles.containerBook2}>
         <div className={styles.containerHead}>
             <h1><b>History Transaction Food</b></h1>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <p>Lorem Ipsum is simply dummy text of the printing<br></br> and typesetting industry.</p>
           </div>
-        <div className={styles.heroTable}>
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Billing To</th>
-                  <th>Start date</th>
-                  <th>Start date</th>
-                  <th>End date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td> 80 cm </td>
-                  <td> 80 cm </td>
-                  <td> 60 cm </td>
-                  <td> 60 cm </td>
-                  <td> 220 cm </td>
-                </tr>
-                <tr>
-                  <td> 70 cm </td>
-                  <td> 70 cm </td>
-                  <td> 65 cm </td>
-                  <td> 65 cm </td>
-                  <td> 80 cm </td>
-                </tr>
-                <tr>
-                  <td> 16 kg </td>
-                  <td> 16 kg </td>
-                  <td> 22 kg </td>
-                  <td> 22 kg </td>
-                  <td> 31 kg </td>
-                </tr>
-                <tr>
-                  <td> 120 cm </td>
-                  <td> 120 cm </td>
-                  <td> 92 cm </td>
-                  <td> 92 cm </td>
-                  <td> 80 cm </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="container table-responsive py-5"> 
+        <table className="table table-striped table-hover">
+          <thead className="table-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
         </div>
       </div>
       </div>

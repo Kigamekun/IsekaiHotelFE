@@ -64,7 +64,7 @@
     text-align: left;
     position: relative;
     left: 40px;
-    top: 10px;
+    top: 20px;
 
 }
 
@@ -74,77 +74,9 @@
     text-align: left;
     position: relative;
     left: 40px;
-    top: 10px;
+    top: 20px;
 }
 
 .heroTable {
-    font-family: "Inter", sans-serif;
-    color: #5E5E5E;
-    line-height: 1;
-    display: flex;
-    justify-content: center;
-    margin: 70px auto;
-    border-radius: 20px;
-    width: 100%;
-    height: 75%;
+  margin: auto;
 }
-
-
-.heroTable table {
-
-    width: 90%;
-    height: 90%;
-    /* border: 1px solid #343a40; */
-    border-collapse: collapse;
-    font-size: 18px;
-    border-radius: 20px;
-  }
-  
-.heroTable td{
-    /* border: 1px solid #343a40; */
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: left;
-  }
-
-.heroTable th:first-child{
-    border-left-style: solid;
-    border-top-left-radius: 10px; 
-    
-}
-
-.heroTable th:last-child {
-    border-right-style: solid;
-    border-top-right-radius: 10px; 
-}
-
-.heroTable td:first-child{
-    border-left-style: solid;
-    border-bottom-left-radius: 10px; 
-    
-}
-
-.heroTable td:last-child {
-    border-right-style: solid;
-    border-bottom-left-radius: 10px;
-}
-  
-.heroTable thead th {
-    background-color: #F3F7F8;
-    color: #2B2D42;
-  }
-
-  .heroTable th {
-        padding-left: 20px;
-        padding-right: 20px;
-  }
-  
-.heroTable tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
-  }
-  
-.heroTable tbody tr:nth-child(odd) {
-    background-color: #e9ecef;
-  }
-
-  
