@@ -2,3 +2,22 @@
   margin: 0px;
   padding: 0px;
 }
+
+
+.button-left {
+  background: #53A1D0 !important; 
+  font-weight: bold !important; 
+  color: white  !important;
+  border:none !important;
+  height: 70px !important;
+  width: 160px !important;
+}
+
+.button-right {
+  color: #53A1D0 !important;
+  border: 3px solid #53A1D0 !important;
+  font-weight: bold !important;
+  height: 70px !important;
+  width: 160px !important;
+
+}
