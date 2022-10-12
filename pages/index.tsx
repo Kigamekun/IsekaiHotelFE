@@ -8,9 +8,10 @@ import Navbar from './components/Navbar'
 import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
+import $ from 'jquery'
 
 type UserSubmitForm = {
   start_from: Date;
@@ -66,7 +67,31 @@ const App: NextPage = () => {
     })
   };
 
-  
+//   function padTo2Digits(num) {
+//     return num.toString().padStart(2, '0');
+// }
+
+//   function formatDate(date) {
+//     return [
+//         date.getFullYear(),
+//         padTo2Digits(date.getMonth() + 1),
+//         padTo2Digits(date.getDate()),
+//     ].join('-');
+
+// }
+
+//   const updateDate = () => {
+//     var firstdate = $('#start_from').val();
+//     $('#end_at').val("");
+//     // Create new Date instance
+//     var date = new Date(firstdate!);
+
+//     // Add a day
+//     date.setDate(date.getDate() + 1);
+
+//     console.log(formatDate(date));
+//     document.getElementById("end_at")!.setAttribute("min", formatDate(date));
+//   }
 
   useEffect(() => {
     getHotelData();
@@ -82,22 +107,14 @@ const App: NextPage = () => {
             <h1> <b>Best Hotel</b></h1>
           </div>
           <div style={{ width: "500px", height: "500px", display: "flex", justifyContent: "center", flexWrap: "wrap", columnGap: "40px" }}>
-            <div className={styles.cards}>
-              <img src="/img/room1.jpg" className="card-img-top" style={{ height: "145px" }} />
-              <h5><b>Shinciri Room</b></h5>
-            </div>
-            <div className={styles.cards}>
-              <img src="/img/room1.jpg" className="card-img-top" style={{ height: "145px" }} />
-              <h5><b>Shinciri Room</b></h5>
-            </div>
-            <div className={styles.cards}>
-              <img src="/img/room1.jpg" className="card-img-top" style={{ height: "145px" }} />
-              <h5><b>Shinciri Room</b></h5>
-            </div>
-            <div className={styles.cards}>
-              <img src="/img/room1.jpg" className="card-img-top" style={{ height: "145px" }} />
-              <h5><b>Shinciri Room</b></h5>
-            </div>
+          {datas &&
+                datas.map((dt, key) => (
+                  <div key={key} className={styles.cards}>
+                  <img src={dt.thumb} className="card-img-top" style={{ height: "145px" ,width:"220px" }} />
+                  <h5><b>{dt.name}</b></h5>
+                </div>
+                ))}
+            
           </div>
         </div>
       </div>

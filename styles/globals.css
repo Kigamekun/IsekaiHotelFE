@@ -30,3 +30,29 @@
 #checkboxes input[type=checkbox]:checked + .whatever{
   background-color: rgba(25, 135, 84,50%);
 }
+
+.status-badge {
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 7px;
+  width: 100px;
+  margin: 20px;
+  font-size: 14px;
+}
+.status-badge.fulfilled {
+
+  background: rgba(34, 187, 51, 0.8);
+  color: white;
+}
+.status-badge.unfulfilled {
+  background: rgba(187, 33, 36, 0.8);
+  color: white;
+}
+.status-badge.idle {
+
+  background: rgba(170, 170, 170, 0.8);
+  color: white;
+}
+.status-badge span.glyphicon {
+  padding-right: 3px;
+}
