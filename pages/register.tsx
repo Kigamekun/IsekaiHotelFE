@@ -13,7 +13,7 @@ import Link from 'next/link';
 const Register: NextPage = () => {
 
     const [email, setEmail] = useState<string>('');
-    const [username, setUsername] = useState<string>('');
+    const [name, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
 
@@ -22,7 +22,7 @@ const Register: NextPage = () => {
     const submitHandler = async (event: any) => {
         event.preventDefault();
         var res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/register`, {
-            'username': username,
+            'name': name,
             'email': email,
             'password': password,
             'password_confirmation': passwordConfirmation,
@@ -71,7 +71,7 @@ const Register: NextPage = () => {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleFormControlInput1" className="form-label">email</label>
-                                <input type="username" className="form-control" id="exampleFormControlInput1" placeholder="email address" style={{ display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} onChange={(event) => setEmail(event.target.value)} />
+                                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="email address" style={{ display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} onChange={(event) => setEmail(event.target.value)} />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleFormControlInput1" className="form-label">Password</label>

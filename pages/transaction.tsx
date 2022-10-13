@@ -10,6 +10,7 @@ import Modal from 'react-bootstrap/Modal'
 import React, { useEffect, useState } from "react"
 import axios from 'axios'
 import { parseCookies, destroyCookie } from "nookies";
+import PaymentXendit from './components/PaymentXendit'
 
 
 
@@ -26,11 +27,36 @@ const Transaction: NextPage = () => {
   const [auth, setAuth] = useState<number>(0);
   const [datas, setData] = useState<any[]>([]);
   const [foods, setFood] = useState<any[]>([]);
+  const [link, setLink] = useState<string>('');
 
   const [modalDataFood, setModalDataFood] = useState<number>(0);
   const [modalDataRoom, setModalDataRoom] = useState<string>('');
 
   const [show, setShow] = useState(false);
+  const [showXendit, setShowXendit] = useState(false);
+
+
+  const handleCloseXendit = () => {
+    setShowXendit(false);
+  };
+  const handleShowXendit = async (e: any) => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/invoice`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({
+        currency: 'IDR',
+        amount: e.currentTarget.getAttribute('data-total'),
+        redirect_url: `${window.location.origin}/transaction`
+      })
+
+      
+    });
+    const data = await response.json();
+    setLink(data.invoice_url);
+    setShowXendit(true);
+  };
 
   const handleClose = () => {
     setShow(false);
@@ -46,7 +72,7 @@ const Transaction: NextPage = () => {
   const getTransactionRoom = async () => {
     var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_room`, {
       headers: {
-    
+
         'content-type': 'text/json',
         'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
       }
@@ -71,7 +97,7 @@ const Transaction: NextPage = () => {
   }
 
   const payTransactionRoom = async (e: any) => {
-    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_room/pay_room/${e.currentTarget.getAttribute('data-id')}`,{
+    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_room/pay_room/${e.currentTarget.getAttribute('data-id')}`, {
       headers: {
         'content-type': 'text/json',
         'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
@@ -84,7 +110,7 @@ const Transaction: NextPage = () => {
   }
 
   const cancelTransactionRoom = async (e: any) => {
-    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_room/cancel_room/${e.currentTarget.getAttribute('data-id')}`,{
+    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_room/cancel_room/${e.currentTarget.getAttribute('data-id')}`, {
       headers: {
         'content-type': 'text/json',
         'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
@@ -99,7 +125,7 @@ const Transaction: NextPage = () => {
 
 
   const payTransactionFood = async (e: any) => {
-    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_food/pay_food/${e.currentTarget.getAttribute('data-id')}`,{
+    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_food/pay_food/${e.currentTarget.getAttribute('data-id')}`, {
       headers: {
         'content-type': 'text/json',
         'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
@@ -112,7 +138,7 @@ const Transaction: NextPage = () => {
   }
 
   const cancelTransactionFood = async (e: any) => {
-    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_food/cancel_food/${e.currentTarget.getAttribute('data-id')}`,{
+    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_food/cancel_food/${e.currentTarget.getAttribute('data-id')}`, {
       headers: {
         'content-type': 'text/json',
         'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
@@ -126,10 +152,12 @@ const Transaction: NextPage = () => {
 
 
 
+
+
   useEffect(() => {
     getTransactionRoom();
     getTransactionFood();
-    
+
   }, []);
 
 
@@ -184,7 +212,7 @@ const Transaction: NextPage = () => {
                       </td>
                       <td style={{ verticalAlign: "middle" }}>
                         {dt.status == 0 ? <button data-id={dt.id} onClick={cancelTransactionRoom} className="btn btn-outline-danger me-2">Cancel</button> : ''}
-                        {dt.status == 0 ? <button data-id={dt.id} onClick={handleShow} className="btn btn-outline-info">Pay</button> : ''}
+                        {dt.status == 0 ? <><button data-id={dt.id} onClick={handleShow} className="btn btn-outline-info">Pay</button>  <button data-id={dt.id} data-total={dt.total} onClick={handleShowXendit} className="btn btn-outline-info">Pay Xendit</button></> : ''}
                       </td>
                     </tr>
                   ))}
@@ -243,10 +271,17 @@ const Transaction: NextPage = () => {
             </table>
           </div>
         </div>
+
       </div>
       <Footer></Footer>
       <Modal size="lg" id="modal-details" show={show} onHide={handleClose}>
         <PaymentModal id={modalDataRoom} />
+      </Modal>
+
+
+
+      <Modal size="lg" id="modal-details" show={showXendit} onHide={handleCloseXendit}>
+        <PaymentXendit id={modalDataRoom} link={link} />
       </Modal>
     </>
   )

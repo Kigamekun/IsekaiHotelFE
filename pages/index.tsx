@@ -25,6 +25,7 @@ type UserSubmitForm = {
 
 const App: NextPage = () => {
   const [datas, setData] = useState<any[]>([]);
+  const [date, setDate] = useState<string>('');
 
   const router = useRouter()
 
@@ -35,6 +36,7 @@ const App: NextPage = () => {
       }).catch(function (error) {
       })
   }
+
 
   const validationSchema = Yup.object().shape({
     start_from: Yup.string().required('Fullname is required'),
@@ -79,13 +81,13 @@ const App: NextPage = () => {
             <h1> <b>Best Hotel</b></h1>
           </div>
           <div className={styles.listHotel}>
-          {datas &&
-                datas.map((dt, key) => (
-                  <div key={key} className={styles.cards}>
-                  <Image src={dt.thumb} className="card-img-top" height= "145px" width="220px"  alt="Data"/>
+            {datas &&
+              datas.map((dt, key) => (
+                <div key={key} className={styles.cards}>
+                  <Image src={dt.thumb} className="card-img-top" height="145px" width="220px" alt="Data" />
                   <h5><b>{dt.name}</b></h5>
                 </div>
-                ))}
+              ))}
           </div>
         </div>
       </div>
@@ -93,8 +95,8 @@ const App: NextPage = () => {
       <div className={styles.containerBook}>
         <form className={styles.inputBook} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.inputBookForm}>
-            <input type="date" id='start_from' {...register('start_from')} className={`form-control ${styles.inputControl} ${errors.start_from ? 'is-invalid' : ''}`} style={{ width: '245px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }}/>
-            <input type="date" id='end_at' {...register('end_at')} className={`form-control ${styles.inputControl} ${errors.end_at ? 'is-invalid' : ''}`} style={{ width: '245px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }}/>
+            <input type="date" id='start_from' {...register('start_from')} className={`form-control ${styles.inputControl} ${errors.start_from ? 'is-invalid' : ''}`} style={{ width: '245px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} onChange={(event) => setDate(event.target.value)} />
+            <input type="date" id='end_at' {...register('end_at')} className={`form-control ${styles.inputControl} ${errors.end_at ? 'is-invalid' : ''}`} style={{ width: '245px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} min={date} />
             <select id="hotel" {...register('hotel')} className={`form-control ${styles.inputControl} ${errors.hotel ? 'is-invalid' : ''}`} style={{ width: '245px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }}>
               <option value="">Select Hotel</option>
               {datas &&
