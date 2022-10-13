@@ -2,27 +2,29 @@ import React, { FC } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
+import $ from 'jquery'
+import { parseCookies, destroyCookie } from "nookies"
 
 type PaymentModalProps = {
-    id: number,
-    name: string,
-    price: string,
-    thumb: string,
-    start_from: string,
-    end_at: string,
+    id: string,
 }
 
-const PaymentModal: FC<PaymentModalProps> = ({ end_at,start_from,id,name, price, thumb }) => {
+const PaymentModal: FC<PaymentModalProps> = ({ id }) => {
 
     const router = useRouter()
 
 
     const BookNow = async (e: any) => {
         e.preventDefault();
-        axios.post(process.env.NEXT_PUBLIC_API_URL + '/api/v1/order_room/booking', {
-            'start_from': start_from,
-            'end_at': end_at,
-            'room_id': id,
+        let formData = new FormData();
+
+        var myFile = $('#bukti').prop('files');
+        formData.append('bukti', myFile);
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_room/pay_room/${id}`, formData, {
+            headers: {
+                'content-type': 'text/json',
+                'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
+            }
         }).then(function (res) {
             if (res.status === 200) {
                 Swal.fire({
@@ -32,9 +34,6 @@ const PaymentModal: FC<PaymentModalProps> = ({ end_at,start_from,id,name, price,
                     showConfirmButton: false,
                     timer: 1500
                 })
-                router.push({
-                    pathname: '/transaction',
-                });
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -50,17 +49,16 @@ const PaymentModal: FC<PaymentModalProps> = ({ end_at,start_from,id,name, price,
         <div>
             <div className="modal-content">
                 <div className="modal-body p-5">
-                    <img className="w-100 mb-4" style={{ borderRadius: "10px", height: "360px" }} src={thumb} />
-                    <h3><b>{name}</b></h3>
-                    <h5>${price}</h5>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero tempora beatae officia quisquam ab impedit facilis explicabo dignissimos nostrum, blanditiis cum cumque nihil? Animi ut harum adipisci cupiditate aliquid non asperiores quasi dolor vitae maxime, molestias eum officiis minus maiores.  </p>
-                    <br />
-                    <br />
-                    <br />
-                    <div className="d-flex justify-content-end gap-4">
-                        <button type="button" className="btn button-left" data-bs-dismiss="modal">Close</button>
-                        <button type="button" onClick={BookNow} className="btn button-right">Book !</button>
-                    </div>
+                    <form id='buktiForm' onSubmit={BookNow}>
+                        <h3>Upload Your Bukti Pembayaran Ruangan</h3>
+                        <br />
+                        <input type="file" name="bukti" id="bukti" className="form-control" />
+                        <br />
+                        <div className="d-flex justify-content-end gap-4">
+                            <button type="button" className="btn button-left" data-bs-dismiss="modal">Close</button>
+                            <button type="button" onClick={BookNow} className="btn button-right">Book !</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

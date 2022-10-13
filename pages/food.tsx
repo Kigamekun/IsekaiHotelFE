@@ -13,14 +13,14 @@ import $ from 'jquery'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Parser from 'html-react-parser'
-
+import { parseCookies, destroyCookie } from "nookies"
 
 interface IFood {
   id: number;
   name: string;
   price: string;
   thumb: string;
-  
+
 }
 
 const Food: NextPage = () => {
@@ -30,9 +30,14 @@ const Food: NextPage = () => {
 
   const [datas, setData] = useState<any[]>([]);
   const [modalDetail, setModalDetail] = useState<string>('Loading ...');
-  const [modalData, setModalData] = useState<IFood>({ id: 0, name: "", price: "", thumb: ""});
+  const [modalData, setModalData] = useState<IFood>({ id: 0, name: "", price: "", thumb: "" });
   const getFoodData = async () => {
-    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/food`)
+    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/food`, {
+      headers: {
+        'content-type': 'text/json',
+        'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
+      }
+    })
       .then(function (response) {
         setData(response.data.data.data);
       }).catch(function (error) {
@@ -63,12 +68,17 @@ const Food: NextPage = () => {
 
   const searchFood = async (e: any) => {
     e.preventDefault();
-    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/food?filter=${$('#search-food').val()}`)
-    .then(function (response) {
-      setData(response.data.data.data);
-    }).catch(function (error) {
-
+    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/food?filter=${$('#search-food').val()}`, {
+      headers: {
+        'content-type': 'text/json',
+        'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
+      }
     })
+      .then(function (response) {
+        setData(response.data.data.data);
+      }).catch(function (error) {
+
+      })
   }
 
 
@@ -84,13 +94,13 @@ const Food: NextPage = () => {
       <div className={styles.hero}>
         <Navbar></Navbar>
         <div className={styles.heroContent}>
-        <div className={styles.heroSection} >
+          <div className={styles.heroSection} >
             <div className="m-5">
               <h3><b>Name Food</b></h3>
               <form onSubmit={searchFood} className="d-flex justify-content-around gap-5">
-              <input type="text" id="search-food" className="form-control" />
-                <button type="submit" className="btn" style={{ width:'246px',borderRadius: "20px", fontSize: "32px", color: '#53A1D0', background: '#53A1D0' }}>
-                  <b><img src="/icon/cil_search.svg" style={{width:'24px',height:'24px'}}/></b>
+                <input type="text" id="search-food" className="form-control" />
+                <button type="submit" className="btn" style={{ width: '246px', borderRadius: "20px", fontSize: "32px", color: '#53A1D0', background: '#53A1D0' }}>
+                  <b><img src="/icon/cil_search.svg" style={{ width: '24px', height: '24px' }} /></b>
                 </button>
               </form>
             </div>
@@ -134,7 +144,7 @@ const Food: NextPage = () => {
 
 
       <Modal size="lg" id="modal-details" show={show} onHide={handleClose}>
-      <ModalFood id={modalData.id}  name={modalData.name} price={modalData.price} thumb={modalData.thumb} />
+        <ModalFood id={modalData.id} name={modalData.name} price={modalData.price} thumb={modalData.thumb} />
       </Modal>
     </>
   )

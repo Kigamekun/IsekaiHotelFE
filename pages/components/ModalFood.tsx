@@ -3,6 +3,8 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 import $ from 'jquery'
+import { parseCookies, destroyCookie } from "nookies"
+
 
 type ModalFoodProps = {
     id: number,
@@ -23,6 +25,11 @@ const ModalFood: FC<ModalFoodProps> = ({ id, name, price, thumb }) => {
             'qty': $('#qty').val(),
             'address': $('#address').val(),
 
+        }, {
+            headers: {
+                'content-type': 'text/json',
+                'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
+            }
         }).then(function (res) {
             if (res.status === 200) {
                 Swal.fire({
@@ -57,16 +64,16 @@ const ModalFood: FC<ModalFoodProps> = ({ id, name, price, thumb }) => {
                     <br />
                     <br />
                     <br />
-                    <div className="d-flex justify-content-around gap-4">
+                    <form onSubmit={OrderNow} className="d-flex justify-content-around gap-4">
                         <div className='d-flex gap-4'>
-                        <input type="number" id='qty' className='form-control' style={{ width: '80px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} />
-                        <input type="text" id='address' className='form-control' style={{ width: '245px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} placeholder='Short Address ..' />
+                            <input type="number" id='qty' className='form-control' style={{ width: '80px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} required />
+                            <input type="text" id='address' className='form-control' style={{ width: '245px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} placeholder='Short Address ..' required />
                         </div>
                         <div className='d-flex gap-4'>
                             <button type="button" className="btn button-left" data-bs-dismiss="modal">Close</button>
-                            <button type="button" onClick={OrderNow} className="btn button-right">Book !</button>
+                            <button type="submit" className="btn button-right">Book !</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

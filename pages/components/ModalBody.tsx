@@ -1,7 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
+import { parseCookies, destroyCookie } from "nookies";
 
 type ModalBodyProps = {
     id: number,
@@ -14,6 +16,8 @@ type ModalBodyProps = {
     end_at: string,
 }
 
+
+
 const ModalBody: FC<ModalBodyProps> = ({ faccility, end_at, start_from, id, name, price, thumb, description }) => {
 
     const router = useRouter()
@@ -25,6 +29,11 @@ const ModalBody: FC<ModalBodyProps> = ({ faccility, end_at, start_from, id, name
             'start_from': start_from,
             'end_at': end_at,
             'room_id': id,
+        }, {
+            headers: {
+                'content-type': 'text/json',
+                'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
+            }
         }).then(function (res) {
             if (res.status === 200) {
                 Swal.fire({
@@ -48,11 +57,12 @@ const ModalBody: FC<ModalBodyProps> = ({ faccility, end_at, start_from, id, name
             }
         });
     }
+
     return (
         <div>
             <div className="modal-content">
                 <div className="modal-body p-5">
-                    <img className="w-100 mb-4" style={{ borderRadius: "10px", height: "360px" }} src={thumb} />
+                    <img className="w-100 mb-4" style={{ borderRadius: "10px", height: "360px", width: '100%' }} src={thumb} alt="Not Found" />
                     <h3><b>{name}</b></h3>
                     <h5>${price}</h5>
                     <p>{description}  </p>

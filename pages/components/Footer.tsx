@@ -24,23 +24,26 @@ const Footer: FC<{}> = () => {
                                 <h3>Around On The Web</h3>
                                 <br />
                                 <div className='d-flex justify-content-center gap-3'>
-                                    <div style={{ width: "42px", height: '42px', borderRadius: '50%', background: 'gray' }}>
-
+                                    <div className='d-flex justify-content-center align-items-center' style={{ width: "42px", height: '42px', borderRadius: '50%', background: 'gray' }}>
+                                        <img src="/icon/instagram.svg" alt="" />
                                     </div>
-                                    <div style={{ width: "42px", height: '42px', borderRadius: '50%', background: 'gray' }}>
-
+                                    <div className='d-flex justify-content-center align-items-center' style={{ width: "42px", height: '42px', borderRadius: '50%', background: 'gray' }}>
+                                        <img src="/icon/akar-icons_telegram-fill.svg" alt="" />
                                     </div>
-                                    <div style={{ width: "42px", height: '42px', borderRadius: '50%', background: 'gray' }}>
-
+                                    <div className='d-flex justify-content-center align-items-center' style={{ width: "42px", height: '42px', borderRadius: '50%', background: 'gray' }}>
+                                        <img src="/icon/icon _linkedin_.svg" alt="" />
                                     </div>
-                                    <div style={{ width: "42px", height: '42px', borderRadius: '50%', background: 'gray' }}>
-
+                                    <div className='d-flex justify-content-center align-items-center' style={{ width: "42px", height: '42px', borderRadius: '50%', background: 'gray' }}>
+                                        <img src="/icon/icon _phone_.svg" alt="" />
                                     </div>
                                 </div>
                             </div>
                             <div style={{ flex: 1 }}>
                                 <h3>About</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam sequi culpa iusto aliquam atque, numquam iure error incidunt nulla.</p>
+                                <p>isekai hotel is a five-star hotel that provides
+                                    room booking services or a place for meetings.
+                                    isakai also provides a variety of food menus
+                                    ranging from VIP to regular</p>
                             </div>
                         </div>
                     </div>

@@ -21,7 +21,7 @@
 .cards {
     background: white;
     height: 200px;
-    padding:5px;
+    padding: 5px;
     border-radius: 10px;
 }
 
@@ -74,7 +74,7 @@
 
 .inputBookForm {
     display: flex;
-    gap:20px;
+    gap: 20px;
     align-items: center;
     justify-content: space-around;
 }
@@ -94,4 +94,53 @@
     border-radius: 50px;
     margin: auto;
 
+}
+
+
+.listHotel {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 40px;
+}
+
+
+
+.inputControl {
+    width: 245px;
+    display: inline-block;
+    padding: 15px 10px; 
+    line-height: 140%;
+}
+
+.buttonSub {
+    border-radius: 20px;
+    font-size: 32px;
+    color: #53A1D0;
+    height: 140px;
+    width: 330px;
+    background: white;
+}
+
+@media only screen and (max-width: 1000px) {
+    .listHotel {
+        display: none !important;
+    }
+    .inputBookForm {
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    .inputBook {
+        flex-direction: column !important;
+    }
+    .containerBook {
+        display: flex;
+        height: unset !important;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
 }

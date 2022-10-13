@@ -1,14 +1,52 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.css'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { parseCookies, destroyCookie } from "nookies";
+import { Menu } from '@headlessui/react'
+import Swal from 'sweetalert2'
+
+interface IUser {
+    id: number;
+    name: string;
+    email: string;
+}
 
 const Navbar: FC<{}> = () => {
 
+    const [userData, setUserData] = useState<IUser>({ id: 0, name: "", email: "" });
+    const [auth, setAuth] = useState<number>(0);
+
+
+    useEffect(() => {
+        if (Object.keys(parseCookies()).length != 0) {
+            setUserData({
+                'id': JSON.parse(parseCookies().user).user.id,
+                'name': JSON.parse(parseCookies().user).user.name,
+                'email': JSON.parse(parseCookies().user).user.email
+            })
+            setAuth(1)
+        }
+
+    }, []);
+
+    const logout = async () => {
+        destroyCookie(null, 'user', 'fromServer')
+        setAuth(0)
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Success Logout !',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{
-            width: '95%', background: 'white', height: '90px', margin: "50px auto", position: 'absolute', zIndex: '9999', top: '20px', left: "50%", transform: "translate(-50%, -50%)"
+            width: '95%', background: 'white', height: '90px', margin: "50px auto", position: 'absolute', zIndex: '10', top: '20px', left: "50%", transform: "translate(-50%, -50%)"
             , borderRadius: "10px"
         }}>
             <div className="container-fluid">
@@ -31,12 +69,24 @@ const Navbar: FC<{}> = () => {
                                 <a className="nav-link">Food</a>
                             </Link>
                         </li>
-                        <DropdownButton id="dropdown-basic-button" drop={'down'} style={{background:'unset !important'}} title="Kiga">
-                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                        </DropdownButton>
+                        {auth == 1
+                            ? <DropdownButton id="dropdown" className='bg-light' drop={'down'} variant={'light'} style={{ background: 'white !important' }} title={userData.name}>
+                                <Dropdown.Item href="#/action-1">Account</Dropdown.Item>
+                                <Dropdown.Item href="/transaction">Transaction</Dropdown.Item>
+                                <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+                            </DropdownButton> : <>
+                                <li className="nav-item">
+                                    <Link href="/login">
+                                        <a className="nav-link " aria-current="page" >Login</a>
+                                    </Link>
+                                </li> <li className="nav-item">
+                                    <Link href="/register">
+                                        <a className="nav-link " aria-current="page" >Register</a>
+                                    </Link>
+                                </li>
+                            </>
 
+                        }
                     </ul>
                 </div>
             </div>

@@ -17,6 +17,8 @@ import Parser from 'html-react-parser'
 import ReactDOM from 'react-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
+import { parseCookies, destroyCookie } from "nookies"
+
 
 interface IHotel {
   id: number;
@@ -28,7 +30,6 @@ interface IHotel {
   start_from?: string;
   end_at?: string;
 }
-
 
 type SearchForm = {
   start_from: Date;
@@ -43,14 +44,18 @@ const Hotel: NextPage = () => {
 
   const [datas, setData] = useState<any[]>([]);
   const [hotelData, setHotelData] = useState<any[]>([]);
-  const [modalData, setModalData] = useState<IHotel>({ id: 0, name: "", price: "", thumb: "", start_from: "", end_at: "",description:"" ,faccility:""});
+  const [modalData, setModalData] = useState<IHotel>({ id: 0, name: "", price: "", thumb: "", start_from: "", end_at: "", description: "", faccility: "" });
   const [modalDetail, setModalDetail] = useState<string>('Loading ...');
   const [startFrom, setStartFrom] = useState<string>('');
   const [endAt, setEndAt] = useState<string>('');
   const [hotelId, setHotelId] = useState<string>('');
-
   const getRoomData = async () => {
-    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/room?id=${data.hotel}`)
+    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/room?id=${data.hotel}`, {
+      headers: {
+        'content-type': 'text/json',
+        'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
+      }
+    })
       .then(function (response) {
         setData(response.data.data.data);
       }).catch(function (error) {
@@ -77,7 +82,12 @@ const Hotel: NextPage = () => {
 
 
   const getHotelData = async () => {
-    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/hotel`)
+    var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/hotel`, {
+      headers: {
+        'content-type': 'text/json',
+        'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
+      }
+    })
       .then(function (response) {
         setHotelData(response.data.data.data);
       }).catch(function (error) {
@@ -93,9 +103,14 @@ const Hotel: NextPage = () => {
     });
 
 
-    axios.post(`${process.env.NEXT_PUBLIC_API_URL }/api/v1/room/search`, {
+    axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/room/search`, {
       'hotel_id': $('#hotel').val(),
       'faccility': checkbox,
+    }, {
+      headers: {
+        'content-type': 'text/json',
+        'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
+      }
     }).then(function (res) {
       setData(res.data.data);
     });
@@ -130,6 +145,11 @@ const Hotel: NextPage = () => {
     axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/room/search`, {
       'hotel_id': $('#hotel').val(),
       'faccility': checkbox,
+    }, {
+      headers: {
+        'content-type': 'text/json',
+        'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
+      }
     }).then(function (res) {
       setData(res.data.data);
     });
@@ -143,7 +163,6 @@ const Hotel: NextPage = () => {
     setHotelId(data.hotel! as string);
     getRoomData();
     getHotelData();
-
   }, [router.isReady]);
 
 
@@ -160,19 +179,19 @@ const Hotel: NextPage = () => {
                 <div id="checkboxes" className='d-flex gap-3'>
                   <input type="checkbox" name="rGroup" value="1" id="r1" />
                   <label className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r1">
-                  <img src="/icon/cil_swimming.svg" style={{width:'24px',height:'24px'}}/>
+                    <Image src="/icon/cil_swimming.svg" alt="logo" width='24px' height='24px' />
                   </label>
                   <input type="checkbox" name="rGroup" value="2" id="r2" />
                   <label className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r2">
-                  <img src="/icon/iconoir_air-conditioner.svg" style={{width:'24px',height:'24px'}}/>
+                    <Image src="/icon/iconoir_air-conditioner.svg" alt="logo" width='24px' height='24px' />
                   </label>
                   <input type="checkbox" name="rGroup" value="3" id="r3" />
                   <label className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r3">
-                  <img src="/icon/akar-icons_wifi.svg" style={{width:'24px',height:'24px'}}/>
+                    <Image src="/icon/akar-icons_wifi.svg" alt="logo" width='24px' height='24px' />
                   </label>
                   <input type="checkbox" name="rGroup" value="4" id="r4" />
                   <label className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r4">
-                  <img src="/icon/ep_food.svg" style={{width:'24px',height:'24px'}}/>
+                    <Image src="/icon/ep_food.svg" alt="logo" width='24px' height='24px' />
                   </label>
                 </div>
               </div>
@@ -180,7 +199,7 @@ const Hotel: NextPage = () => {
                 <div style={{ textAlign: 'center' }}>
                   <h4>Check In - Check Out </h4>
                   <br />
-                
+
                   <div className='d-flex gap-3'>
                     <div className="mb-3">
                       <input type="date" {...register('start_from')} className={`form-control ${errors.start_from ? 'is-invalid' : ''}`} onChange={(event) => setStartFrom(event.target.value)} />
@@ -200,8 +219,8 @@ const Hotel: NextPage = () => {
                   </div>
                 </div>
               </div>
-              <button type="submit" className="btn" style={{ borderRadius: "20px", fontSize: "32px", color: '#53A1D0', background: '#53A1D0',width:'246px' }}>
-                <b><img src="/icon/cil_search.svg" style={{width:'24px',height:'24px'}}/></b>
+              <button type="submit" className="btn" style={{ borderRadius: "20px", fontSize: "32px", color: '#53A1D0', background: '#53A1D0', width: '246px' }}>
+                <b><Image src="/icon/cil_search.svg" width='24px' height='24px' alt="hotel" /></b>
               </button>
             </form>
           </div>

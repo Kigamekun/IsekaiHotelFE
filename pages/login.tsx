@@ -7,7 +7,9 @@ import React, { useEffect, useState } from "react"
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
-
+import nookies from 'nookies'
+import { parseCookies, setCookie } from "nookies"
+import Link from 'next/link';
 
 const Login: NextPage = () => {
 
@@ -16,9 +18,9 @@ const Login: NextPage = () => {
     const router = useRouter();
 
 
-    const submitHandler = async (event : any) => {
+    const submitHandler = async (event: any) => {
         event.preventDefault();
-        var res = await axios.post(process.env.NEXT_PUBLIC_API_URL + '/api/v1/auth/login', {
+        var res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`, {
             'email': email,
             'password': password,
         }).then(function (res) {
@@ -31,8 +33,12 @@ const Login: NextPage = () => {
                     timer: 1500
                 })
 
-                localStorage.setItem("user", JSON.stringify(res.data));
-                router.push({pathname: '/'})
+                // localStorage.setItem("user", JSON.stringify(res.data));
+                setCookie(null, "user", JSON.stringify(res.data), {
+                    maxAge: 3600,
+                });
+
+                router.push({ pathname: '/' })
 
             } else {
                 Swal.fire({
@@ -62,26 +68,30 @@ const Login: NextPage = () => {
                 <div className={styles.content}>
                     <div>
                         <form onSubmit={submitHandler}>
-                        <h1><b>Login</b></h1>
-                        <br />
-                        <br />
-                        <div className="mb-3">
-                            <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
-                            <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Enter your email address ..." style={{ display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} onChange={(event) => setEmail(event.target.value)} />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="exampleFormControlInput1" className="form-label">Password</label>
-                            <input type="password" className="form-control" id="exampleFormControlInput1" placeholder="Enter your password ..." style={{ display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} onChange={(event) => setPassword(event.target.value)} />
-                        </div>
-                        <br />
-                        <br />
-                        <div className="d-flex justify-content-between">
-                            <h6>Dont Have Account</h6>
-                            <h6>Forgot Password ?</h6>
-                        </div>
-                        <br />
-                        <br />
-                        <button className="btn btn-info  w-100" style={{ height: "60px", color: 'white', background: "linear-gradient(90deg, #53A1D0, #97C7D5) !important" }}>Login</button>
+                            <h1><b>Login</b></h1>
+                            <br />
+                            <br />
+                            <div className="mb-3">
+                                <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
+                                <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Enter your email address ..." style={{ display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} onChange={(event) => setEmail(event.target.value)} />
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="exampleFormControlInput1" className="form-label">Password</label>
+                                <input type="password" className="form-control" id="exampleFormControlInput1" placeholder="Enter your password ..." style={{ display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} onChange={(event) => setPassword(event.target.value)} />
+                            </div>
+                            <br />
+                            <br />
+                            <div className="d-flex justify-content-between">
+                                <h6>
+                                    <Link href="/register">
+                                        <a style={{ color: 'black', textDecoration: 'none' }} >Dont Have Account</a>
+                                    </Link>
+                                </h6>
+                                <h6>Forgot Password ?</h6>
+                            </div>
+                            <br />
+                            <br />
+                            <button className="btn btn-info  w-100" style={{ height: "60px", color: 'white', background: "linear-gradient(90deg, #53A1D0, #97C7D5) !important" }}>Login</button>
                         </form>
                     </div>
                 </div>
