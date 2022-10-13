@@ -20,7 +20,6 @@ interface IFood {
   name: string;
   price: string;
   thumb: string;
-
 }
 
 const Food: NextPage = () => {
@@ -41,7 +40,6 @@ const Food: NextPage = () => {
       .then(function (response) {
         setData(response.data.data.data);
       }).catch(function (error) {
-
       })
   }
 
@@ -60,11 +58,6 @@ const Food: NextPage = () => {
   };
 
 
-  const getDataModal = async (e: any) => {
-
-  }
-
-
 
   const searchFood = async (e: any) => {
     e.preventDefault();
@@ -77,7 +70,6 @@ const Food: NextPage = () => {
       .then(function (response) {
         setData(response.data.data.data);
       }).catch(function (error) {
-
       })
   }
 
@@ -106,9 +98,6 @@ const Food: NextPage = () => {
             </div>
           </div>
         </div>
-
-
-
       </div>
       <br />
       <br />
@@ -118,7 +107,6 @@ const Food: NextPage = () => {
       <br />
       <br />
       <h2 style={{ textAlign: 'center' }}><b>List Menu</b></h2>
-
       <br />
       <br />
       <div className="container" style={{ background: 'rgba(83, 161, 208, 0.3)', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap', padding: '50px', borderRadius: '20px' }}>
@@ -129,7 +117,6 @@ const Food: NextPage = () => {
               <h5><b>{data.name}</b></h5>
               <h6>${data.price}</h6>
             </div>
-
           ))}
       </div>
       <div className="container mt-5">
@@ -137,7 +124,6 @@ const Food: NextPage = () => {
           <b> View More</b>
         </div>
       </div>
-
       <Footer></Footer>
 
 

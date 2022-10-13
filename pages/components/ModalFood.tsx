@@ -11,13 +11,11 @@ type ModalFoodProps = {
     name: string,
     price: string,
     thumb: string,
-
 }
 
 const ModalFood: FC<ModalFoodProps> = ({ id, name, price, thumb }) => {
-
     const router = useRouter()
-
+    
     const OrderNow = async (e: any) => {
         e.preventDefault();
         axios.post(process.env.NEXT_PUBLIC_API_URL + '/api/v1/order_food/order', {

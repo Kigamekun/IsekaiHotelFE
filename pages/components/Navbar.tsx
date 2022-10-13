@@ -28,7 +28,6 @@ const Navbar: FC<{}> = () => {
             })
             setAuth(1)
         }
-
     }, []);
 
     const logout = async () => {
@@ -85,7 +84,6 @@ const Navbar: FC<{}> = () => {
                                     </Link>
                                 </li>
                             </>
-
                         }
                     </ul>
                 </div>

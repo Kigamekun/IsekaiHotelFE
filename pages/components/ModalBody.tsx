@@ -16,12 +16,8 @@ type ModalBodyProps = {
     end_at: string,
 }
 
-
-
 const ModalBody: FC<ModalBodyProps> = ({ faccility, end_at, start_from, id, name, price, thumb, description }) => {
-
     const router = useRouter()
-
 
     const BookNow = async (e: any) => {
         e.preventDefault();

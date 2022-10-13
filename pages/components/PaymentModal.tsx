@@ -13,11 +13,9 @@ const PaymentModal: FC<PaymentModalProps> = ({ id }) => {
 
     const router = useRouter()
 
-
     const BookNow = async (e: any) => {
         e.preventDefault();
         let formData = new FormData();
-
         var myFile = $('#bukti').prop('files');
         formData.append('bukti', myFile);
         axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/order_room/pay_room/${id}`, formData, {
