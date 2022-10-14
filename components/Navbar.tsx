@@ -61,7 +61,9 @@ const Navbar: FC<{}> = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link " aria-current="page" href="#">About</a>
+                        <Link href="/about">
+                            <a className="nav-link ">About</a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <Link href="/food">

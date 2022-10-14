@@ -66,12 +66,12 @@ const Register: NextPage = () => {
                             <br />
                             <br />
                             <div className="mb-3">
-                                <label htmlFor="exampleFormControlInput1" className="form-label">username</label>
-                                <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="username" style={{ display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} onChange={(event) => setUsername(event.target.value)} />
+                                <label htmlFor="exampleFormControlInput1" className="form-label">Username</label>
+                                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="username" style={{ display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} onChange={(event) => setUsername(event.target.value)} />
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="exampleFormControlInput1" className="form-label">email</label>
-                                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="email address" style={{ display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} onChange={(event) => setEmail(event.target.value)} />
+                                <label htmlFor="exampleFormControlInput1" className="form-label">E- Mail</label>
+                                <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="email" style={{ display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} onChange={(event) => setEmail(event.target.value)} />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleFormControlInput1" className="form-label">Password</label>

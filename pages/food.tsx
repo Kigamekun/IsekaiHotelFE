@@ -3,9 +3,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/food.module.css'
 import 'bootstrap/dist/css/bootstrap.css'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import ModalFood from './components/ModalFood'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import ModalFood from '../components/ModalFood'
 import React, { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
 import axios from 'axios'
@@ -130,7 +130,7 @@ const Food: NextPage = () => {
 
 
       <Modal size="lg" id="modal-details" show={show} onHide={handleClose}>
-        <ModalFood id={modalData.id} name={modalData.name} price={modalData.price} thumb={modalData.thumb} />
+        <ModalFood id={modalData.id} name={modalData.name} price={modalData.price} thumb={modalData.thumb} handleCloseModal={handleClose} />
       </Modal>
     </>
   )

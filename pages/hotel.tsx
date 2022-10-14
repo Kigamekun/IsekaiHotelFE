@@ -4,9 +4,9 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import styles from '../styles/hotel.module.css'
 import 'bootstrap/dist/css/bootstrap.css'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import ModalBody from './components/ModalBody'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import ModalBody from '../components/ModalBody'
 import React, { useEffect, useState } from "react"
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
@@ -263,7 +263,7 @@ const Hotel: NextPage = () => {
 
 
       <Modal size="lg" id="modal-details" show={show} onHide={handleClose}>
-        <ModalBody id={modalData.id} start_from={modalData.start_from!} end_at={modalData.end_at!} name={modalData.name} price={modalData.price} description={modalData.description} thumb={modalData.thumb} faccility={modalData.faccility} />
+        <ModalBody id={modalData.id} start_from={modalData.start_from!} end_at={modalData.end_at!} name={modalData.name} price={modalData.price} description={modalData.description} thumb={modalData.thumb} faccility={modalData.faccility} handleCloseModal={handleClose} />
       </Modal>
     </>
   )

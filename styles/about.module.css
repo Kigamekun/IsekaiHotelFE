@@ -1,0 +1,122 @@
+.overflow {
+    overflow-x: hidden;
+}
+.hero {
+    background: url('/img/hero.jpg') no-repeat;
+    width: 100%;
+    height: 75vh;
+    background-position-y: -300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 0px 0px 50px 50px;
+
+}
+
+.hero img {
+    width: 100%;
+    height: 650px;
+    object-fit: cover;
+
+}
+
+
+.heroContent {
+    display: flex;
+    /* background-color: red; */
+    width: 100%;
+    justify-content: space-around;
+    height: 90vh;
+    align-items: center;
+
+
+
+}
+
+
+.heroContent p {
+    color: white;
+margin-left: 60px;
+    font-size: 60px;
+}
+
+.heroSection {
+    background-color: white;
+    width: 95%;
+    padding:50px;
+    border-radius: 50px;
+    margin-top: -10%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+
+}
+
+
+
+.heroSection p {
+    margin-top: 20px;
+    margin-left: -10px;
+    justify-content: space-between;
+}
+
+.heroDesc {
+    background-color: white;
+    width: 95%;
+    padding:50px;
+    border-radius: 50px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+
+.heroDesc p{
+align-items: center;
+margin-left: -20px;
+
+}
+.kontak{
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+    width: 80%;
+    margin: 0px auto;
+    margin-top: 40px;
+    margin-bottom: 90px;
+    background-color: white;
+    position: relative;
+    bottom: 0px;
+    height: 600px;
+
+    border-radius: 20px;
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+.div{
+    margin:auto;
+    align-items: center;
+}
+
+.kontak label{
+    width: 30px;
+}
+
+

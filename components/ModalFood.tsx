@@ -11,11 +11,12 @@ type ModalFoodProps = {
     name: string,
     price: string,
     thumb: string,
+    handleCloseModal: (values: any) => void;
 }
 
-const ModalFood: FC<ModalFoodProps> = ({ id, name, price, thumb }) => {
+const ModalFood: FC<ModalFoodProps> = ({ id, name, price, thumb,handleCloseModal }) => {
     const router = useRouter()
-    
+
     const OrderNow = async (e: any) => {
         e.preventDefault();
         axios.post(process.env.NEXT_PUBLIC_API_URL + '/api/v1/order_food/order', {
@@ -68,7 +69,7 @@ const ModalFood: FC<ModalFoodProps> = ({ id, name, price, thumb }) => {
                             <input type="text" id='address' className='form-control' style={{ width: '245px', display: "inline-block", padding: "15px 10px", lineHeight: "140%" }} placeholder='Short Address ..' required />
                         </div>
                         <div className='d-flex gap-4'>
-                            <button type="button" className="btn button-left" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn button-left" onClick={handleCloseModal}>Close</button>
                             <button type="submit" className="btn button-right">Book !</button>
                         </div>
                     </form>

@@ -14,13 +14,19 @@ type ModalBodyProps = {
     start_from: string,
     faccility: string,
     end_at: string,
+    handleCloseModal: (values: any) => void;
+
 }
 
-const ModalBody: FC<ModalBodyProps> = ({ faccility, end_at, start_from, id, name, price, thumb, description }) => {
+const ModalBody: FC<ModalBodyProps> = ({ faccility, end_at, start_from, id, name, price, thumb, description, handleCloseModal }) => {
     const router = useRouter()
 
     const BookNow = async (e: any) => {
         e.preventDefault();
+
+        var act = JSON.parse(parseCookies().user).access_token;
+
+        console.log(act);
         axios.post(process.env.NEXT_PUBLIC_API_URL + '/api/v1/order_room/booking', {
             'start_from': start_from,
             'end_at': end_at,
@@ -28,7 +34,7 @@ const ModalBody: FC<ModalBodyProps> = ({ faccility, end_at, start_from, id, name
         }, {
             headers: {
                 'content-type': 'text/json',
-                'Authorization': `Bearer ${JSON.parse(parseCookies().user).access_token}`,
+                'Authorization': `Bearer ${act}`,
             }
         }).then(function (res) {
             if (res.status === 200) {
@@ -70,23 +76,23 @@ const ModalBody: FC<ModalBodyProps> = ({ faccility, end_at, start_from, id, name
                         <div className="d-flex gap-3 align-items-center">
 
                             {Object.keys(JSON.parse(JSON.parse(faccility))).map((data, key) => (
-                                data == "0" ? <label className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r1">
+                                data == "0" ? <label key={key} className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r1">
                                     <img src="/icon/cil_swimming.svg" style={{ width: '24px', height: '24px' }} />
                                 </label> :
-                                    data == "1" ? <label className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r2">
+                                    data == "1" ? <label key={key} className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r2">
                                         <img src="/icon/iconoir_air-conditioner.svg" style={{ width: '24px', height: '24px' }} />
                                     </label> :
-                                        data == "2" ? <label className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r3">
+                                        data == "2" ? <label key={key} className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r3">
                                             <img src="/icon/akar-icons_wifi.svg" style={{ width: '24px', height: '24px' }} />
                                         </label> :
-                                            data == "3" ? <label className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r4">
+                                            data == "3" ? <label key={key} className='whatever d-flex justify-content-center align-items-center' style={{ border: '1px solid gray', width: '50px', height: '50px', borderRadius: '10px' }} htmlFor="r4">
                                                 <img src="/icon/ep_food.svg" style={{ width: '24px', height: '24px' }} />
                                             </label>
                                                 : ""
                             ))}
                         </div>
                         <div className="d-flex justify-content-end gap-4">
-                            <button type="button" className="btn button-left" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn button-left" onClick={handleCloseModal}>Close</button>
                             <button type="button" onClick={BookNow} className="btn button-right">Book !</button>
                         </div>
                     </div>

@@ -3,14 +3,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/transaction.module.css'
 import 'bootstrap/dist/css/bootstrap.css'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import PaymentModal from './components/PaymentModal'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import PaymentModal from '../components/PaymentModal'
 import Modal from 'react-bootstrap/Modal'
 import React, { useEffect, useState } from "react"
 import axios from 'axios'
 import { parseCookies, destroyCookie } from "nookies";
-import PaymentXendit from './components/PaymentXendit'
+import PaymentXendit from '../components/PaymentXendit'
 
 
 
@@ -48,7 +48,8 @@ const Transaction: NextPage = () => {
       body: JSON.stringify({
         currency: 'IDR',
         amount: e.currentTarget.getAttribute('data-total'),
-        redirect_url: `${window.location.origin}/transaction`
+        redirect_url: `${window.location.origin}/transaction`,
+        room_id:e.currentTarget.getAttribute('data-id')
       })
 
       
@@ -275,7 +276,7 @@ const Transaction: NextPage = () => {
       </div>
       <Footer></Footer>
       <Modal size="lg" id="modal-details" show={show} onHide={handleClose}>
-        <PaymentModal id={modalDataRoom} />
+        <PaymentModal id={modalDataRoom} handleCloseModal={handleClose} />
       </Modal>
 
 

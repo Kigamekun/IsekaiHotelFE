@@ -7,9 +7,10 @@ import { parseCookies, destroyCookie } from "nookies"
 
 type PaymentModalProps = {
     id: string,
+    handleCloseModal: (values: any) => void;
 }
 
-const PaymentModal: FC<PaymentModalProps> = ({ id }) => {
+const PaymentModal: FC<PaymentModalProps> = ({ id,handleCloseModal }) => {
 
     const router = useRouter()
 
@@ -53,7 +54,7 @@ const PaymentModal: FC<PaymentModalProps> = ({ id }) => {
                         <input type="file" name="bukti" id="bukti" className="form-control" />
                         <br />
                         <div className="d-flex justify-content-end gap-4">
-                            <button type="button" className="btn button-left" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn button-left" onClick={handleCloseModal}>Close</button>
                             <button type="button" onClick={BookNow} className="btn button-right">Book !</button>
                         </div>
                     </form>
