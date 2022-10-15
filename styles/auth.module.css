@@ -24,3 +24,9 @@
 .btn {
     background: linear-gradient(90deg, #53A1D0, #97C7D5) !important; 
 }
+
+@media only screen and (max-width: 1000px) {
+    .content {
+        margin-right: unset;
+    }
+}

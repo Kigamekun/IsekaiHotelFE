@@ -13,14 +13,14 @@ const Footer: FC<{}> = () => {
             <br />
             <br />
             <footer>
-                <div className='d-flex align-items-center' style={{ background: '#2C3E50', color: 'white', height: '300px' }}>
+                <div className='d-flex align-items-center' style={{ background: '#2C3E50', color: 'white'}}>
                     <div className="container">
                         <div className="d-flex justify-content-between gap-5  h-100 text-center">
                             <div style={{ flex: 1 }}>
                                 <h3>Location</h3>
                                 <p>Lorem ipsum dolor sit amet.</p>
                             </div>
-                            <div style={{ flex: 1 }}>
+                            <div className='around-web' style={{ flex: 1 }}>
                                 <h3>Around On The Web</h3>
                                 <br />
                                 <div className='d-flex justify-content-center gap-3'>

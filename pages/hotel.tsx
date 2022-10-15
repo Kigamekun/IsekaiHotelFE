@@ -41,7 +41,7 @@ const Hotel: NextPage = () => {
 
   const router = useRouter()
   const data = router.query;
-
+  const today = new Date().toISOString().split('T')[0];
   const [datas, setData] = useState<any[]>([]);
   const [hotelData, setHotelData] = useState<any[]>([]);
   const [modalData, setModalData] = useState<IHotel>({ id: 0, name: "", price: "", thumb: "", start_from: "", end_at: "", description: "", faccility: "" });
@@ -49,6 +49,7 @@ const Hotel: NextPage = () => {
   const [startFrom, setStartFrom] = useState<string>('');
   const [endAt, setEndAt] = useState<string>('');
   const [hotelId, setHotelId] = useState<string>('');
+  const [date, setDate] = useState<string>('');
   const getRoomData = async () => {
     var res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/room?id=${data.hotel}`, {
       headers: {
@@ -196,13 +197,13 @@ const Hotel: NextPage = () => {
                 </div>
               </div>
               <div>
-                <div style={{ textAlign: 'center' }}>
+                <div className={`${styles.checks}`}  style={{ textAlign: 'center' }}>
                   <h4>Check In - Check Out </h4>
                   <br />
 
-                  <div className='d-flex gap-3'>
+                  <div className={`${styles.checkInOut} d-flex gap-3`}>
                     <div className="mb-3">
-                      <input type="date" {...register('start_from')} className={`form-control ${errors.start_from ? 'is-invalid' : ''}`} onChange={(event) => setStartFrom(event.target.value)} />
+                      <input type="date" {...register('start_from')} min={today.toString()} className={`form-control ${errors.start_from ? 'is-invalid' : ''}`} onChange={(event) => {setStartFrom(event.target.value);setDate(event.target.value);}} />
                     </div>
                     <div className="mb-3">
                       <select id="hotel" {...register('hotel_id')} className={`form-control ${errors.start_from ? 'is-invalid' : ''}`}>
@@ -214,7 +215,7 @@ const Hotel: NextPage = () => {
                       </select>
                     </div>
                     <div className="mb-3">
-                      <input type="date" {...register('end_at')} className={`form-control ${errors.start_from ? 'is-invalid' : ''}`} onChange={(event) => setEndAt(event.target.value)} />
+                      <input type="date" {...register('end_at')} className={`form-control ${errors.start_from ? 'is-invalid' : ''}`} min={date} onChange={(event) => setEndAt(event.target.value)} />
                     </div>
                   </div>
                 </div>

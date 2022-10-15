@@ -6,6 +6,10 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { parseCookies, destroyCookie } from "nookies";
 import { Menu } from '@headlessui/react'
 import Swal from 'sweetalert2'
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbars from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 interface IUser {
     id: number;
@@ -44,53 +48,100 @@ const Navbar: FC<{}> = () => {
 
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{
+
+        // <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{
+        //     width: '95%', background: 'white', height: '90px', margin: "50px auto", position: 'absolute', zIndex: '10', top: '20px', left: "50%", transform: "translate(-50%, -50%)"
+        //     , borderRadius: "10px"
+        // }}>
+        //     <div className="container-fluid">
+        //         <a className="navbar-brand" href="#"><b>Isekai Hotel</b></a>
+        //         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        //             <span className="navbar-toggler-icon" />
+        //         </button>
+        //         <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        //             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+        //                 <li className="nav-item">
+        //                     <Link href="/">
+        //                         <a className="nav-link">Home</a>
+        //                     </Link>
+        //                 </li>
+        //                 <li className="nav-item">
+        //                 <Link href="/about">
+        //                     <a className="nav-link ">About</a>
+        //                     </Link>
+        //                 </li>
+        //                 <li className="nav-item">
+        //                     <Link href="/food">
+        //                         <a className="nav-link">Food</a>
+        //                     </Link>
+        //                 </li>
+        //                 {auth == 1
+        //                     ? <DropdownButton id="dropdown" className='bg-light' drop={'down'} variant={'light'} style={{ background: 'white !important' }} title={userData.name}>
+        //                         <Dropdown.Item href="#/action-1">Account</Dropdown.Item>
+        //                         <Dropdown.Item href="/transaction">Transaction</Dropdown.Item>
+        //                         <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+        //                     </DropdownButton> : <>
+        //                         <li className="nav-item">
+        //                             <Link href="/login">
+        //                                 <a className="nav-link " aria-current="page" >Login</a>
+        //                             </Link>
+        //                         </li> <li className="nav-item">
+        //                             <Link href="/register">
+        //                                 <a className="nav-link " aria-current="page" >Register</a>
+        //                             </Link>
+        //                         </li>
+        //                     </>
+        //                 }
+        //             </ul>
+        //         </div>
+        //     </div>
+        // </nav>
+        <Navbars bg="light" expand="lg" style={{
+            padding: '20px',
             width: '95%', background: 'white', height: '90px', margin: "50px auto", position: 'absolute', zIndex: '10', top: '20px', left: "50%", transform: "translate(-50%, -50%)"
             , borderRadius: "10px"
         }}>
-            <div className="container-fluid">
-                <a className="navbar-brand" href="#"><b>Isekai Hotel</b></a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon" />
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link href="/">
-                                <a className="nav-link">Home</a>
-                            </Link>
-                        </li>
-                        <li className="nav-item">
+
+            <Navbars.Brand href="#home"><b>Isekai Hotel</b></Navbars.Brand>
+            <Navbars.Toggle aria-controls="basic-navbar-nav" />
+            <Navbars.Collapse id="basic-navbar-nav">
+                <Nav className="ms-auto">
+                    <li className="nav-item">
+                        <Link href="/">
+                            <a className="nav-link">Home</a>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
                         <Link href="/about">
                             <a className="nav-link ">About</a>
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link href="/food">
-                                <a className="nav-link">Food</a>
-                            </Link>
-                        </li>
-                        {auth == 1
-                            ? <DropdownButton id="dropdown" className='bg-light' drop={'down'} variant={'light'} style={{ background: 'white !important' }} title={userData.name}>
-                                <Dropdown.Item href="#/action-1">Account</Dropdown.Item>
-                                <Dropdown.Item href="/transaction">Transaction</Dropdown.Item>
-                                <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
-                            </DropdownButton> : <>
-                                <li className="nav-item">
-                                    <Link href="/login">
-                                        <a className="nav-link " aria-current="page" >Login</a>
-                                    </Link>
-                                </li> <li className="nav-item">
-                                    <Link href="/register">
-                                        <a className="nav-link " aria-current="page" >Register</a>
-                                    </Link>
-                                </li>
-                            </>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link href="/food">
+                            <a className="nav-link">Food</a>
+                        </Link>
+                    </li>
+                    {auth == 1
+                        ? <DropdownButton id="dropdown" className='bg-light' drop={'down'} variant={'light'} style={{ background: 'white !important' }} title={userData.name}>
+                            <Dropdown.Item href="#/action-1">Account</Dropdown.Item>
+                            <Dropdown.Item href="/transaction">Transaction</Dropdown.Item>
+                            <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+                        </DropdownButton> : <>
+                            <li className="nav-item">
+                                <Link href="/login">
+                                    <a className="nav-link " aria-current="page" >Login</a>
+                                </Link>
+                            </li> <li className="nav-item">
+                                <Link href="/register">
+                                    <a className="nav-link " aria-current="page" >Register</a>
+                                </Link>
+                            </li>
+                        </>
+                    }
+                </Nav>
+            </Navbars.Collapse>
+
+        </Navbars >
     );
 };
 

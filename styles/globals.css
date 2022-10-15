@@ -5,10 +5,10 @@
 
 
 .button-left {
-  background: #53A1D0 !important; 
-  font-weight: bold !important; 
-  color: white  !important;
-  border:none !important;
+  background: #53A1D0 !important;
+  font-weight: bold !important;
+  color: white !important;
+  border: none !important;
   height: 70px !important;
   width: 160px !important;
 }
@@ -23,12 +23,12 @@
 }
 
 
-#checkboxes input[type=checkbox]{
+#checkboxes input[type=checkbox] {
   display: none;
 }
 
-#checkboxes input[type=checkbox]:checked + .whatever{
-  background-color: rgba(25, 135, 84,50%);
+#checkboxes input[type=checkbox]:checked+.whatever {
+  background-color: rgba(25, 135, 84, 50%);
 }
 
 .status-badge {
@@ -39,20 +39,66 @@
   margin: 20px;
   font-size: 14px;
 }
+
 .status-badge.fulfilled {
 
   background: rgba(34, 187, 51, 0.8);
   color: white;
 }
+
 .status-badge.unfulfilled {
   background: rgba(187, 33, 36, 0.8);
   color: white;
 }
+
 .status-badge.idle {
 
   background: rgba(170, 170, 170, 0.8);
   color: white;
 }
+
 .status-badge span.glyphicon {
   padding-right: 3px;
+}
+
+footer div {
+  padding: 20px;
+}
+
+@media only screen and (max-width: 1000px) {
+  footer div .container div {
+    flex-direction: column;
+  }
+
+  footer {
+    height: 100%;
+  }
+
+  footer div .container {
+    padding: 10px;
+    flex-direction: row;
+  }
+
+  .around-web div {
+    display: flex;
+    flex-direction: row !important;
+  }
+
+  footer div {
+    flex-direction: column;
+  }
+
+  .footer div {
+    height: 100%;
+  }
+  .navbar-nav {
+    background: white !important;
+    padding:10px;
+    border-radius: 10px;
+  }
+
+  .navbar-nav li {
+    margin-left:10px;
+  }
+
 }
